@@ -108,24 +108,29 @@
             display: flex;
             flex-direction: column;
             padding: 16px;
-            gap: 16px;
+            gap: 12px;
             max-width: 600px;
             margin: 0 auto;
             width: 100%;
+            min-height: 0;
         }
 
         /* 运算符区域 */
         .operators-area {
             background: rgba(255, 255, 255, 0.9);
             border-radius: 16px;
-            padding: 16px;
+            padding: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            flex: 35;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
         }
 
         .area-title {
             font-size: 12px;
             color: #666;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -133,18 +138,20 @@
         .operators-grid {
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 12px;
             flex-wrap: wrap;
+            flex: 1;
         }
 
         .operator-btn {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             border: none;
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
-            font-size: 24px;
+            font-size: 30px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s;
@@ -152,6 +159,9 @@
             user-select: none;
             -webkit-user-select: none;
             touch-action: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .operator-btn:active {
@@ -166,11 +176,12 @@
         .expression-area {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 16px;
-            padding: 20px;
+            padding: 16px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            min-height: 120px;
+            flex: 15;
             display: flex;
             flex-direction: column;
+            min-height: 0;
         }
 
         .drop-zone {
@@ -265,15 +276,20 @@
         .numbers-area {
             background: rgba(255, 255, 255, 0.9);
             border-radius: 16px;
-            padding: 16px;
+            padding: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            flex: 1;
+            flex: 25;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
         }
 
         .numbers-grid {
+            flex: 1;
             display: flex;
             justify-content: center;
-            gap: 12px;
+            align-items: center;
+            gap: 24px;
             flex-wrap: wrap;
         }
 
@@ -293,6 +309,9 @@
             user-select: none;
             -webkit-user-select: none;
             touch-action: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .number-btn:active {
@@ -308,12 +327,20 @@
             opacity: 0.5;
         }
 
+        /* 挑战模式数字容器 */
+        #challenge-numbers {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+        }
+
         /* 数字输入面板（自由模式） */
         .number-pad {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-            max-width: 340px;
+            gap: 16px;
+            max-width: 380px;
             margin: 0 auto;
         }
 
@@ -332,6 +359,9 @@
             user-select: none;
             -webkit-user-select: none;
             touch-action: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .pad-btn:active {
@@ -346,18 +376,20 @@
         .actions-bar {
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 16px;
-            padding: 16px;
+            padding: 12px;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 16px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            flex: 25;
         }
 
         .action-btn {
-            padding: 12px 24px;
+            padding: 16px 32px;
             border: none;
-            border-radius: 25px;
-            font-size: 14px;
+            border-radius: 30px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s;
@@ -1026,6 +1058,10 @@
                 
                 try {
                     if (!/^[\d+\-*/().\s]+$/.test(expr)) {
+                        return null;
+                    }
+                    
+                    if (/(\D|^)0+[1-9]\d*/.test(expr)) {
                         return null;
                     }
                     
